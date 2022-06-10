@@ -1,5 +1,6 @@
 import 'package:custom_bottom_navigationbar/body_main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,21 +30,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final  mainPage = <Widget>[
+  final mainPage = <Widget>[
     const Page1(),
     const Page2(),
     const Page3(),
-
   ];
-
+  late int currentIndex;
+  @override
+  void initState() {
+    currentIndex = 0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
-      appBar: AppBar(title: const Text("Bottom NavigationBar"),),
-      body: ,
+      appBar: AppBar(
+        title: const Text("Bottom NavigationBar"),
+      ),
+      body: Consumer(
+        builder: (context, value, child) {
+          return mainPage[currentIndex];
+        },
+      ),
+      bottomNavigationBar: ,
     );
   }
 }
